@@ -83,13 +83,32 @@ class ArticleController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($comment);
             $em->flush();
-            // $article->addComment($comment);
-            // $articleService->putArticle($article);
             return $this->redirectToRoute('read',['id'=>$id]);
         }
         return $this->render("article/read.html.twig", [
             'article' => $article,
             'form_comment' => $form->createView()
+        ]);
+    }
+    /**
+     * @Route("/tag/{id}", name="byTag")
+     */
+    public function byTag(ArticleService $articleService, $id)
+    {   
+        $articles = $articleService->getArticlesByTag($id);
+        return $this->render("article/index.html.twig", [
+            'articles' => $articles,
+        ]);
+    }
+
+    /**
+     * @Route("/category/{id}", name="byCategory")
+     */
+    public function byCategory(ArticleService $articleService, $id)
+    {   
+        $articles = $articleService->getArticlesByCategory($id);
+        return $this->render("article/index.html.twig", [
+            'articles' => $articles,
         ]);
     }
 }

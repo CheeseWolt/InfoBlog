@@ -8,7 +8,6 @@
         <a href="{{path('newArticle')}}" class="btn btn-primary m-2">Nouvel Article</a>
         <div class="card-deck">
             {% for article in articles %}
-
                 <div class="card mb-3" style="max-width: 540px;">
                     <div class="row no-gutters">
                         <div class="col-md-4">
@@ -16,16 +15,16 @@
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
-                                <div class="card-header">
-                                    {% for category in article.category %}
-                                        <h3>{{category.name}}</h3>
-                                    {% endfor %}
-                                </div>
                                 <h5 class="card-title">{{article.title}}</h5>
                                 <p class="card-text">{{article.content |striptags|slice(0, 40)}}</p>
                                 <p class="card-text">
                                     <small class="text-muted">{{article.author.username ~' '~ article.date | date("d/m/Y - H:i:s") }}</small>
                                 </p>
+                                {% for category in article.category %}
+                                    <a href="{{path('byCategory',{'id':category.id})}}">
+                                        <span class="badge badge-primary">{{category.name}}</span>
+                                    </a>
+                                {% endfor %}
                                 {% if article.tag is not empty %}
                                     {% for tag in article.tag %}
                                         <span class="badge badge-secondary">{{tag.name}}</span>

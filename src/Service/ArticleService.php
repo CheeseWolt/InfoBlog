@@ -3,6 +3,8 @@ namespace App\Service;
 
 
 use App\Entity\Article;
+use App\Entity\Category;
+use App\Entity\Tag;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ArticleService extends AbstractController
@@ -21,6 +23,24 @@ class ArticleService extends AbstractController
     public function getArticle(int $id)
     {
         return $this->getDoctrine()->getRepository(Article::class)->find($id);
+    }
+
+    /**
+     * Retrive a article corresponding to a given tag id
+     */
+    public function getArticlesByTag(int $id)
+    {
+        $tag = $this->getDoctrine()->getRepository(Tag::class)->find($id);
+        return $tag->getArticles();
+    }
+    
+    /**
+     * Retrive a article corresponding to a given category id
+     */
+    public function getArticlesByCategory(int $id)
+    {
+        $tag = $this->getDoctrine()->getRepository(Category::class)->find($id);
+        return $tag->getArticles();
     }
     
     /**

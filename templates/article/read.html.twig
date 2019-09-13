@@ -6,10 +6,17 @@
 
 {% block body %}
     <div class="container">
+        <a href="{{path('updateArticle',{'id':article.id})}}" class="btn btn-warning">Editer l'article</a>
+        <a href="{{path('removeArticle',{'id':article.id})}}" class="btn btn-danger">Supprimer l'article</a>
         <h2 class="blog-post-title">{{article.title}}</h2>
-        <p class="blog-post-meta">January 1, 2014 by
+        {% for category in article.category %}
+            <a href="{{path('byCategory',{'id':category.id})}}"><span class="badge badge-primary">{{category.name}}</span></a>
+        {% endfor %}
+        <p class="blog-post-meta">
             {% for tag in article.tag %}
-                <span class="badge badge-secondary">{{tag.name}}</span>
+                <a href="{{path('byTag',{'id':tag.id})}}">
+                    <span class="badge badge-secondary">{{tag.name}}</span>
+                </a>
             {% endfor %}
             <div class="muted">{{article.date | date('d/m/Y - H:i:s')}}</div>
         </p>

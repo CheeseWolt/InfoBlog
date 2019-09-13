@@ -6,12 +6,14 @@
 {% block body %}
     <div class="container">
         <div class="row">
-            {% for tag in tags %}
-                <div class="btn-group p-2">
-                    <a href="{{path('updateTag',{'id':tag.id})}}" class="btn btn-success">{{ tag.name }}</a>
-                    <a href="{{path('removeTag',{'id':tag.id})}}" class="btn btn-danger">X</a>
-                </div>
-            {% endfor %}
+            {% if tags is not empty %}
+                {% for tag in tags %}
+                    <div class="btn-group p-2">
+                        <a href="{{path('updateTag',{'id':tag.id})}}" class="btn btn-secondary">{{ tag.name }}</a>
+                        <a href="{{path('removeTag',{'id':tag.id})}}" class="btn btn-danger">X</a>
+                    </div>
+                {% endfor %}
+            {% endif %}
             <div class="p-2">
                 <a href="{{path('newTag')}}" class="btn btn-outline-primary">Nouveau</a>
             </div>

@@ -6,12 +6,14 @@
 {% block body %}
     <div class="container">
         <div class="row">
-            {% for category in categories %}
-                <div class="btn-group p-2">
-                    <a href="{{path('updateCategory',{'id':category.id})}}" class="btn btn-success">{{ category.name }}</a>
-                    <a href="{{path('removeCategory',{'id':category.id})}}" class="btn btn-danger">X</a>
-                </div>
-            {% endfor %}
+            {% if categories is not empty %}
+                {% for category in categories %}
+                    <div class="btn-group p-2">
+                        <a href="{{path('updateCategory',{'id':category.id})}}" class="btn btn-primary">{{ category.name }}</a>
+                        <a href="{{path('removeCategory',{'id':category.id})}}" class="btn btn-danger">X</a>
+                    </div>
+                {% endfor %}
+            {% endif %}
             <div class="p-2">
                 <a href="{{path('newCategory')}}" class="btn btn-outline-primary">Nouvelle</a>
             </div>
