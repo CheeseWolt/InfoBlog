@@ -17,16 +17,16 @@
                             <p class="card-text">
                                 <small class="text-muted">{{article.author.username ~' '~ article.date | date("d/m/Y - H:i") }}</small>
                             </p>
-                            <div class="card-footer">
-                                {% for category in article.category %}
-                                    <a href="{{path('byCategory',{'id':category.id})}}" class="badge badge-primary">{{category.name}}</a>
+                        </div>
+                        <div class="card-footer">
+                            {% for category in article.category %}
+                                <a href="{{path('byCategory',{'id':category.id})}}" class="badge badge-primary">{{category.name}}</a>
+                            {% endfor %}
+                            {% if article.tag is not empty %}
+                                {% for tag in article.tag %}
+                                    <a href="{{path('byTag', {'id':tag.id})}}" class="badge badge-secondary">{{tag.name}}</a>
                                 {% endfor %}
-                                {% if article.tag is not empty %}
-                                    {% for tag in article.tag %}
-                                        <a href="{{path('byTag', {'id':tag.id})}}" class="badge badge-secondary">{{tag.name}}</a>
-                                    {% endfor %}
-                                {% endif %}
-                            </div>
+                            {% endif %}
                         </div>
                         <div class="d-flex">
                             <a href="{{path('read',{'id':article.id})}}" class="card-footer text-light text-center bg-primary flex-fill">Lire</a>
