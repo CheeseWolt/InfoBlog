@@ -16,6 +16,7 @@ class ArticleType extends AbstractType
         $builder
             ->add('title')
             ->add('content')
+            ->add('imagePath')
             ->add('author',EntityType::class,[
                 'class'=>User::class,
                 'choice_label'=> 'userName'

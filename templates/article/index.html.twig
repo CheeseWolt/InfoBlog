@@ -6,35 +6,31 @@
 {% block body %}
     <div class="container">
         <a href="{{path('newArticle')}}" class="btn btn-primary m-2">Nouvel Article</a>
-        <div class="card-deck">
+        <div class="row">
             {% for article in articles %}
-                <div class="card mb-3" style="max-width: 540px;">
-                    <div class="row no-gutters">
-                        <div class="col-md-4">
-                            <img src="https://via.placeholder.com/200" class="card-img" alt="placeholder">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">{{article.title}}</h5>
-                                <p class="card-text">{{article.content |striptags|slice(0, 40)}}</p>
-                                <p class="card-text">
-                                    <small class="text-muted">{{article.author.username ~' '~ article.date | date("d/m/Y - H:i:s") }}</small>
-                                </p>
+                <div class="d-flex col-sm-4 align-items-strecth">
+                    <div class="card mb-3">
+                        <img src="{% if article.imagePath is not null %} {{article.imagePath}}{% else %} https://via.placeholder.com/500{% endif %} " class="card-img " alt="placeholder">
+                        <div class="card-body ">
+                            <h5 class="card-title">{{article.title}}</h5>
+                            <p class="card-text">{{article.content |striptags|slice(0, 50)}}...</p>
+                            <p class="card-text">
+                                <small class="text-muted">{{article.author.username ~' '~ article.date | date("d/m/Y - H:i") }}</small>
+                            </p>
+                            <div class="card-footer">
                                 {% for category in article.category %}
-                                    <a href="{{path('byCategory',{'id':category.id})}}">
-                                        <span class="badge badge-primary">{{category.name}}</span>
-                                    </a>
+                                    <a href="{{path('byCategory',{'id':category.id})}}" class="badge badge-primary">{{category.name}}</a>
                                 {% endfor %}
                                 {% if article.tag is not empty %}
                                     {% for tag in article.tag %}
-                                        <span class="badge badge-secondary">{{tag.name}}</span>
+                                        <a href="{{path('byTag', {'id':tag.id})}}" class="badge badge-secondary">{{tag.name}}</a>
                                     {% endfor %}
                                 {% endif %}
                             </div>
                         </div>
-                    </div>
-                    <div class="card-footer text-center">
-                        <a href="{{path('read',{'id':article.id})}}" class="stretched-link ">Lire</a>
+                        <div class="d-flex">
+                            <a href="{{path('read',{'id':article.id})}}" class="card-footer text-light text-center bg-primary flex-fill">Lire</a>
+                        </div>
                     </div>
                 </div>
             {% endfor %}
