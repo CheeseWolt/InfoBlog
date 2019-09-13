@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}{% block title %}Tags
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row p-5">
+            <a href="{{path('tag')}}" class="btn btn-primary">Retour aux tags</a>
+        </div>
+        <div class="row">
+            {{form(form)}}
+            </div>
+        </div>
+    {% endblock %}

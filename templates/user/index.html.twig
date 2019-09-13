@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des utilisateurs
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <a href="{{path('newUser')}}" class="btn btn-outline-primary">Ajouter</a>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>#</td>
+                    <td>Nom</td>
+                    <td>Prénom</td>
+                    <td>Nom d'utilisateur</td>
+                    <td>email</td>
+                    <td>Action</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{user.id}}</td>
+                        <td>{{user.lastname}}</td>
+                        <td>{{user.firstname}}</td>
+                        <td>{{user.username}}</td>
+                        <td>{{user.email}}</td>
+                        <td><div class="btn-group"><a href="{{path('updateUser',{'id':user.id})}}" class="btn btn-primary">Modifier</a><a href="{{path('removeUser',{'id':user.id})}}" class="btn btn-danger">X</a></div></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

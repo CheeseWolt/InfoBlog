@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block title %}Categories{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row p-5">
+            <a href="{{path('category')}}" class="btn btn-primary">Retour aux catégories</a>
+        </div>
+        <div class="row">
+            {{form(form)}}
+            </div>
+        </div>
+    {% endblock %}

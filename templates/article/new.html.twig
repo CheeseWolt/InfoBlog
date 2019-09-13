@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Ajouter un article
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row p-5">
+            <a href="{{path('user')}}" class="btn btn-primary">Retour aux articles</a>
+        </div>
+        <div class="row">
+            {{form_start(form)}}
+            {{form_row(form.title)}}
+            {{form_row(form.content)}}
+            {{form_row(form.category)}}
+            {{form_row(form.author)}}
+            <span class="badge">
+                {{form_row(form.tag)}}
+            </span>
+            {{form_end(form)}}
+        </div>
+    </div>
+</div>{% endblock %}

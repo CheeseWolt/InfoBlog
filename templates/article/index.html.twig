@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Article
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <a href="{{path('newArticle')}}" class="btn btn-primary m-2">Nouvel Article</a>
+        <div class="card-deck">
+            {% for article in articles %}
+
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <img src="https://via.placeholder.com/200" class="card-img" alt="placeholder">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <div class="card-header">
+                                    {% for category in article.category %}
+                                        <h3>{{category.name}}</h3>
+                                    {% endfor %}
+                                </div>
+                                <h5 class="card-title">{{article.title}}</h5>
+                                <p class="card-text">{{article.content |striptags|slice(0, 40)}}</p>
+                                <p class="card-text">
+                                    <small class="text-muted">{{article.author.username ~' '~ article.date | date("d/m/Y - H:i:s") }}</small>
+                                </p>
+                                {% if article.tag is not empty %}
+                                    {% for tag in article.tag %}
+                                        <span class="badge badge-secondary">{{tag.name}}</span>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="{{path('read',{'id':article.id})}}" class="stretched-link ">Lire</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

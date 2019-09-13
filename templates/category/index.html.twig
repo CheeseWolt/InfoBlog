@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categories
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            {% for category in categories %}
+                <div class="btn-group p-2">
+                    <a href="{{path('updateCategory',{'id':category.id})}}" class="btn btn-success">{{ category.name }}</a>
+                    <a href="{{path('removeCategory',{'id':category.id})}}" class="btn btn-danger">X</a>
+                </div>
+            {% endfor %}
+            <div class="p-2">
+                <a href="{{path('newCategory')}}" class="btn btn-outline-primary">Nouvelle</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

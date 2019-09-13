@@ -1,0 +1,34 @@
+{% extends "base.html.twig" %}
+{% form_theme form_comment 'bootstrap_4_layout.html.twig' %}
+{% block title %}
+    {{article.title}}
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h2 class="blog-post-title">{{article.title}}</h2>
+        <p class="blog-post-meta">January 1, 2014 by
+            {% for tag in article.tag %}
+                <span class="badge badge-secondary">{{tag.name}}</span>
+            {% endfor %}
+            <div class="muted">{{article.date | date('d/m/Y - H:i:s')}}</div>
+        </p>
+        <div class="div">{{article.content}}</div>
+    </div>
+    <div class="container">
+        {{form(form_comment)}}
+            {% if article.comment is not empty %}
+                {% for comment in article.comment %}
+                    <div class="card mb-3">
+                        <div class="row not-gutters">
+                            <div class="card-header">
+                                <h4 class="card-title">{{comment.author.username}}</h4>
+                                <p class="muted">{{comment.date | date('d/m/Y - H:i:s')}}</p>
+                            </div>
+                            <p class="card-text">{{comment.content}}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    {% endblock %}
